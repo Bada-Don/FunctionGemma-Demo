@@ -69,16 +69,21 @@ def parse_function_call(output):
     
     # Parse arguments
     args = {}
-    arg_pattern = r'(\w+):<escape>([^<]+)<escape>'
-    for arg_match in re.finditer(arg_pattern, args_str):
+    
+    # Pattern 1: arg:<escape>value<escape> (for strings)
+    escaped_pattern = r'(\w+):<escape>([^<]+)<escape>'
+    for arg_match in re.finditer(escaped_pattern, args_str):
         key = arg_match.group(1)
         value = arg_match.group(2)
-        # Try to convert to int if possible
-        try:
-            value = int(value)
-        except ValueError:
-            pass
         args[key] = value
+    
+    # Pattern 2: arg:value (for numbers, no escape tags)
+    direct_pattern = r'(\w+):(\d+)'
+    for arg_match in re.finditer(direct_pattern, args_str):
+        key = arg_match.group(1)
+        if key not in args:  # Don't overwrite escaped values
+            value = int(arg_match.group(2))
+            args[key] = value
     
     return func_name, args
 
