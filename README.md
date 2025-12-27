@@ -50,26 +50,37 @@ This will download the model to `./local_models/functiongemma-270m-it`
 
 ## Usage
 
-### Run the Demo
+### Interactive Demo (Recommended)
+
+Chat with the model and execute commands in real-time:
+
+```cmd
+python interactive_demo.py
+```
+
+Try commands like:
+- "Open notepad"
+- "Type Hello World"
+- "Search for Python tutorials"
+- "Set volume to 50"
+
+### Multi-Step Demo (Proper Conversation Format)
+
+Execute complex multi-step tasks using FunctionGemma's conversation pattern:
+
+```cmd
+python proper_multistep.py
+```
+
+This demonstrates how the model can chain multiple function calls through conversation turns, like "Open notepad and type Hello World".
+
+### Basic Demos
+
+Run the original demos:
 
 ```cmd
 python demo.py
-```
-
-This will run three examples showing function calling in action.
-
-### Run the Main Script
-
-```cmd
 python main.py
-```
-
-This shows the raw model output.
-
-### Load Model Only
-
-```cmd
-python loader.py
 ```
 
 ## Available Functions
